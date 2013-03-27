@@ -243,7 +243,7 @@ function VariantOptions(params) {
     selected.each(function(){
       $this = $(this)
       var selection = $this.parents('.variant-options').find('h6 strong.selection')
-      selection.html($this.attr('title'));
+      //selection.html($this.attr('title'));
 
       if ($this.hasClass('out-of-stock'))
         selection.addClass('out-of-stock').attr('title', i18n.out_of_stock);
