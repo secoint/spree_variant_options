@@ -11,7 +11,7 @@ Spree::Variant.class_eval do
       :id    => self.id,
       :count => self.count_on_hand,
       :on_demand => self.on_demand,
-      :price => number_to_currency(actual_price)
+      :price => Spree::Money.new(actual_price).to_s
     }
   end
 

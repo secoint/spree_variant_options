@@ -3,11 +3,11 @@
     <% index = 0 %>
     <% @product.grouped_option_values.each do |type, values| %>
       <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
-        <h6 class="variant-option-type">
-          <%= label_tag 'option-value-name', t(:select_a, :index => index + 1, :name => type.presentation.downcase) %>
+        <h4 class="variant-option-type">
+          Kies je <%= type.presentation.downcase %>
           <strong class='selection'></strong>
           <%= link_to "", "#clear", :class => "icon-remove clear-button clear-index-#{index}" %>
-        </h6>
+        </h4>
 
         <ul class="variant-option-values" class='inline'>
         <% values.sort_by(&:position).each do |value| %>
@@ -15,7 +15,7 @@
           <% unless (variants = @product.variants_for_option_value(value)).empty? %>
             <% classes << ( Spree::Config[:allow_backorders] || variants.sum(&:count_on_hand) > 0 || variants.map(&:on_demand).include?(true) ? "in-stock" : "out-of-stock" ) if index == 0 %>
             <% classes << 'with-image' if value.has_image? %>
-            <li><%= link_to value.has_image? ? image_tag(value.image.url, :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
+            <li><%= link_to value.has_image? ? image_tag(value.image.url(:large), :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
           <% end %>
         <% end %>
           <li class="clear"></li>
