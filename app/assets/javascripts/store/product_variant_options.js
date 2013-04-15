@@ -10,10 +10,12 @@ var show_variant_images = function(variant_id) {
     if (thumb.length == 0) {
       thumb = $($('ul.thumbnails li:visible').eq(0));
     }
-    var newImg = thumb.find('a').attr('href');
+    var newImg = thumb.find('a').attr('rel');
+    var newId = thumb.find('a').attr('rel');
     $('ul.thumbnails li').removeClass('selected');
     thumb.addClass('selected');
-    $('#main-image img').attr('src', newImg);
+    $('#main-image').attr('src', newImg);
+    $('#main-image').attr('rel', "clickid-"+variant_id);
     $("#main-image").data('selectedThumb', newImg);
     $("#main-image").data('selectedThumbId', thumb.attr('id'));
   }
